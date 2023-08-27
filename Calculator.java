@@ -95,9 +95,36 @@ public class Calculator implements ActionListener {
 
     }
 
-    public static void main(String[] args) {
+    void Calculate() {
+        num2 = Double.parseDouble(textField.getText());
 
-        Calculator calc = new Calculator();
+        switch (operator) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 == 0) {
+                    textField.setText("Error");
+                } else {
+                    result = num1 / num2;
+                }
+                break;
+            default:
+                textField.setText("Error");
+                break;
+        }
+        textField.setText(String.valueOf(result));
+        num1 = result;
+    }
+
+    public static void main(String[] args) {
+        new Calculator();
     }
 
     @Override
@@ -130,53 +157,48 @@ public class Calculator implements ActionListener {
             num1 = 0;
             num2 = 0;
             result = 0;
+            for (int i = 0; i < 10; i++) {
+                functionButtons[i].setBackground(null);
+            }
         }
         if (e.getSource() == addButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '+';
+            for (int i = 0; i < 10; i++) {
+                functionButtons[i].setBackground(null);
+            }
+            addButton.setBackground(Color.RED);
             textField.setText("");
         }
         if (e.getSource() == subButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '-';
+            for (int i = 0; i < 10; i++) {
+                functionButtons[i].setBackground(null);
+            }
+            subButton.setBackground(Color.RED);
             textField.setText("");
         }
         if (e.getSource() == mulButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '*';
+            for (int i = 0; i < 10; i++) {
+                functionButtons[i].setBackground(null);
+            }
+            mulButton.setBackground(Color.RED);
             textField.setText("");
         }
         if (e.getSource() == divButton) {
             num1 = Double.parseDouble(textField.getText());
             operator = '/';
+            for (int i = 0; i < 10; i++) {
+                functionButtons[i].setBackground(null);
+            }
+            divButton.setBackground(Color.RED);
             textField.setText("");
         }
         if (e.getSource() == equButton) {
-            num2 = Double.parseDouble(textField.getText());
-
-            switch (operator) {
-                case '+':
-                    result = num1 + num2;
-                    break;
-                case '-':
-                    result = num1 - num2;
-                    break;
-                case '*':
-                    result = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 == 0) {
-                        textField.setText("Error");
-                    } else {
-                        result = num1 / num2;
-                    }
-                    break;
-                default:
-                    textField.setText("Error");
-                    break;
-            }
-            textField.setText(String.valueOf(result));
-            num1 = result;
+            Calculate();
         }
     }
 }
